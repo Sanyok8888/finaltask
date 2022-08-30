@@ -3,6 +3,8 @@ package tests.ui;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import configreader.FrameworkProperties;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
@@ -17,13 +19,18 @@ public class BaseUiTest extends BaseTest {
 
     @BeforeMethod
     public void baseUiSetup() throws MalformedURLException {
+
+        FrameworkProperties frameworkProperties =
+        ConfigFactory.create(FrameworkProperties.class);
+
         Configuration.holdBrowserOpen = true;
         Configuration.timeout = 10000;
 
+        boolean isRemote = frameworkProperties.getDriverRemote();
+        String baseUrl = frameworkProperties.getBaseUrl();
 
 
-        boolean isRemote = false;
-        String baseUrl = "https://google.com";
+
         if (isRemote == true) {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("browserName", "chrome");

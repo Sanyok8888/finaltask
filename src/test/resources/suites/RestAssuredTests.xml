@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="RestAssuredTests" verbose="1">
+    <test name="RestAssuredTest">
+        <classes>
+            <class name="tests.restassured.AppleApiTest" />
+        </classes>
+    </test>
+</suite>
